@@ -2,7 +2,7 @@ const test = require('tape');
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 
-test('get solutions', t => {
+test('get application versions', t => {
 
   t.test('should build query from whitelist', assert => {
 
@@ -15,7 +15,7 @@ test('get solutions', t => {
       'fact_find_id',
     ];
 
-    const target = proxyquire('./get-solutions', {
+    const target = proxyquire('./get-application-versions', {
       '../db/helpers': {
         buildQuery: (whitelist) => {
           assert.deepEqual(whitelist, expectedWhitelist);
@@ -25,8 +25,8 @@ test('get solutions', t => {
         buildProjection: () => () => {
         },
       },
-      '../db/solution-reader': {
-        getSolutions: () => Promise.resolve(),
+      '../db/application-version-reader': {
+        getApplicationVersions: () => Promise.resolve(),
       },
     });
 
@@ -49,7 +49,7 @@ test('get solutions', t => {
       'updated_at',
     ];
 
-    const target = proxyquire('./get-solutions', {
+    const target = proxyquire('./get-application-versions', {
       '../db/helpers': {
         buildProjection: (whitelist) => {
           assert.deepEqual(whitelist, expectedWhitelist);
@@ -59,8 +59,8 @@ test('get solutions', t => {
         buildQuery: () => () => {
         },
       },
-      '../db/solution-reader': {
-        getSolutions: () => Promise.resolve(),
+      '../db/application-version-reader': {
+        getApplicationVersions: () => Promise.resolve(),
       },
     });
 
@@ -68,7 +68,7 @@ test('get solutions', t => {
 
   });
 
-  t.test('should send results from solution reader', assert => {
+  t.test('should send results from application version reader', assert => {
 
     assert.plan(5);
 
@@ -79,7 +79,7 @@ test('get solutions', t => {
     const fakeProjection = 'fake projection';
     const fakeResults = 'fake results';
 
-    const target = proxyquire('./get-solutions', {
+    const target = proxyquire('./get-application-versions', {
       '../db/helpers': {
         buildQuery: () => query => {
           assert.deepEqual(query, fakeReq.query);
@@ -92,8 +92,8 @@ test('get solutions', t => {
           return fakeProjection;
         },
       },
-      '../db/solution-reader': {
-        getSolutions: (query, projection) => {
+      '../db/application-version-reader': {
+        getApplicationVersions: (query, projection) => {
           assert.equal(query, fakeQuery);
           assert.equal(projection, fakeProjection);
 

@@ -2,7 +2,7 @@ const test = require('tape');
 const sinon = require('sinon');
 const proxyquire = require('proxyquire').noCallThru();
 
-test('getSolutions', t => {
+test('getApplicationVersions', t => {
 
   t.test('should pass query and projection ', assert => {
 
@@ -16,12 +16,12 @@ test('getSolutions', t => {
     const sortStub = sinon.stub().withArgs({ update_at: 'desc' }).returns({ select: selectStub });
     const findStub = sinon.stub().withArgs(fakeQuery).returns({ sort: sortStub });
 
-    const solutionStub = {
+    const applicationVersionStub = {
       find: findStub,
     };
 
-    const { getSolutions } = proxyquire('./solution-reader', { './application-version-model': solutionStub });
-    const target = getSolutions;
+    const { getApplicationVersions } = proxyquire('./application-version-reader', { './application-version-model': applicationVersionStub });
+    const target = getApplicationVersions;
 
     target(fakeQuery, fakeProjection);
 
@@ -32,7 +32,7 @@ test('getSolutions', t => {
 
 });
 
-test('getSolution', t => {
+test('getApplicationVersion', t => {
 
   t.test('should find by id', assert => {
 
@@ -43,12 +43,12 @@ test('getSolution', t => {
     const execSpy = sinon.spy();
     const findStub = sinon.stub().withArgs(fakeId).returns({ exec: execSpy });
 
-    const solutionStub = {
+    applicationVersionStub = {
       findById: findStub,
     };
 
-    const { getSolution } = proxyquire('./solution-reader', { './application-version-model': solutionStub });
-    const target = getSolution;
+    const { getApplicationVersion } = proxyquire('./application-version-reader', { './application-version-model': applicationVersionStub });
+    const target = getApplicationVersion;
 
     target(fakeId);
 

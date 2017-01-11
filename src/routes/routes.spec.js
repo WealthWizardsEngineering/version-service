@@ -11,12 +11,12 @@ test('routes', (t) => {
       get: (route, ...middleware) => {
         assert.equal(route, '/v1/version');
 
-        assert.equal(middleware[1], 'get-solutions');
+        assert.equal(middleware[1], 'get-application-versions');
       },
     };
 
     const target = proxyquire('./', {
-      './get-solutions': 'get-solutions',
+      './get-application-versions': 'get-application-versions',
     });
 
     target(fakeApp);

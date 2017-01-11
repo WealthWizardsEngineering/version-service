@@ -1,18 +1,18 @@
 const ApplicationVersion = require('./application-version-model');
 
-const getSolutions = (query, projection) =>
+const getApplicationVersions = (query, projection) =>
   ApplicationVersion
     .find(query)
     .sort({ updated_at: 'desc' })
     .select(projection)
     .exec();
 
-const getSolution = id =>
+const getApplicationVersion = id =>
   ApplicationVersion
     .findById(id)
     .exec();
 
 module.exports = {
-  getSolutions,
-  getSolution,
+  getApplicationVersions,
+  getApplicationVersion,
 };
