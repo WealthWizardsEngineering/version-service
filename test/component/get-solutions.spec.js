@@ -22,7 +22,7 @@ test('get solutions', (t) => {
       .then(() => solutionCreator(fakeSolutionB))
       .then(() => {
         request(app)
-          .get('/version-service/v1/solution')
+          .get('/version-service/v1/version')
           .end((err, res) => {
             assert.equal(res.status, 200);
             assert.equal(res.body.length, 2);
@@ -51,7 +51,7 @@ test('get solutions', (t) => {
   //     .then(() => Promise.all(fakeSolutions.map(x => solutionCreator(x))))
   //     .then(() => {
   //       request(app)
-  //         .get('/solution-service/v1/solution')
+  //         .get('/solution-service/v1/version')
   //         .query({ fact_find_id: 'ffa,ffc' })
   //         .set('Authorization', `Bearer ${token}`)
   //         .end((err, res) => {
@@ -84,7 +84,7 @@ test('get solutions', (t) => {
   //     .then(() => Promise.all(fakeSolutions.map(x => solutionCreator(x))))
   //     .then(() => {
   //       request(app)
-  //         .get('/solution-service/v1/solution')
+  //         .get('/solution-service/v1/version')
   //         .query({ fields: 'fact_find_id' })
   //         .set('Authorization', `Bearer ${token}`)
   //         .end((err, res) => {
