@@ -2,7 +2,8 @@ const Joi = require('joi');
 
 const querystringValidation = Joi.object().keys({
   _id: Joi.string(),
-  fact_find_id: Joi.string(),
+  environment: Joi.string(),
+  application_name: Joi.string(),
   fields: Joi.string(),
 });
 

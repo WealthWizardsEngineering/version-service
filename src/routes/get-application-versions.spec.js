@@ -12,7 +12,8 @@ test('get application versions', t => {
 
     const expectedWhitelist = [
       '_id',
-      'fact_find_id',
+      'environment',
+      'application_name',
     ];
 
     const target = proxyquire('./get-application-versions', {
@@ -42,9 +43,9 @@ test('get application versions', t => {
 
     const expectedWhitelist = [
       '_id',
-      'fact_find_id',
-      'solution',
-      'suitability_report',
+      'environment',
+      'application_name',
+      'version',
       'created_at',
       'updated_at',
     ];

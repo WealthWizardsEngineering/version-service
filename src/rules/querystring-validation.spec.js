@@ -16,7 +16,8 @@ test('querystring validation', assert => {
 
   const expectedKeys = {
     _id: 'string',
-    fact_find_id: 'string',
+    environment: 'string',
+    application_name: 'string'
     fields: 'string',
   };
 

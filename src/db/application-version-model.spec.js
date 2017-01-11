@@ -6,18 +6,16 @@ test('application version model', (t) => {
 
   t.test('creates a new mongoose schema', assert => {
 
-    assert.plan(7);
+    assert.plan(5);
 
     const fakeObjectId = 'fake object id';
 
     timekeeper.freeze(new Date());
 
     function fakeSchema(schema, options) {
-      assert.deepEqual(schema.fact_find_id, { type: String, required: true });
-      assert.deepEqual(schema.solution, { type: Object });
-      assert.deepEqual(schema.suitability_report, { type: String });
-      assert.deepEqual(schema.statement_of_fact, { type: fakeObjectId, ref: 'fs.files' });
-      assert.deepEqual(schema.solution_summary, { type: fakeObjectId, ref: 'fs.files' });
+      assert.deepEqual(schema.environment, { type: String });
+      assert.deepEqual(schema.application_name, { type: String });
+      assert.deepEqual(schema.version, { type: String });
       assert.deepEqual(options, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
     }
 

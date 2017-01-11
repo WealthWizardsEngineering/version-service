@@ -14,8 +14,8 @@ test('get application versions', (t) => {
 
     assert.plan(3);
 
-    const fakeApplicationVersionA = { fact_find_id: 'ffa', solution: { id: 'fake solution a' } };
-    const fakeApplicationVersionB = { fact_find_id: 'ffb', solution: { id: 'fake solution b' } };
+    const fakeApplicationVersionA = { environment: 'environmenta', application_name: 'application_namea', version: 'versiona' };
+    const fakeApplicationVersionB = { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb' };
 
     clearDownApplicationVersionDB()
       .then(() => applicationVersionCreator(fakeApplicationVersionA))
@@ -27,80 +27,74 @@ test('get application versions', (t) => {
             assert.equal(res.status, 200);
             assert.equal(res.body.length, 2);
 
-            const results = res.body.map(({ fact_find_id, solution }) => ({ fact_find_id, solution }));
+            const results = res.body.map(({ environment, application_name, version }) => ({ environment, application_name, version }));
 
             assert.deepEqual(results, [ fakeApplicationVersionB, fakeApplicationVersionA ]);
           });
       });
 
   });
-  //
-  // t.test('should return all solutions with matching fact_find_id', assert => {
-  //
-  //   assert.plan(3);
-  //
-  //   const fakeSolutions = [
-  //     { fact_find_id: 'ffa', solution: { id: 'fake solution a' } },
-  //     { fact_find_id: 'ffb', solution: { id: 'fake solution b' } },
-  //     { fact_find_id: 'ffc', solution: { id: 'fake solution c' } },
-  //   ];
-  //
-  //   const token = jwt.sign({}, env.JWT_SECRET);
-  //
-  //   clearDownSolutionDB()
-  //     .then(() => Promise.all(fakeSolutions.map(x => solutionCreator(x))))
-  //     .then(() => {
-  //       request(app)
-  //         .get('/solution-service/v1/version')
-  //         .query({ fact_find_id: 'ffa,ffc' })
-  //         .set('Authorization', `Bearer ${token}`)
-  //         .end((err, res) => {
-  //           assert.equal(res.status, 200);
-  //           assert.equal(res.body.length, 2);
-  //
-  //           const results = res.body.map(({ fact_find_id, solution }) => ({ fact_find_id, solution }));
-  //
-  //           const expectedSolutions = [fakeSolutions[2], fakeSolutions[0]];
-  //
-  //           assert.deepEqual(results, expectedSolutions);
-  //         });
-  //     });
-  //
-  // });
-  //
-  // t.test('should only return specified fields', assert => {
-  //
-  //   assert.plan(3);
-  //
-  //   const fakeSolutions = [
-  //     { fact_find_id: 'ffa', solution: { id: 'fake solution a' } },
-  //     { fact_find_id: 'ffb', solution: { id: 'fake solution b' } },
-  //     { fact_find_id: 'ffc', solution: { id: 'fake solution c' } },
-  //   ];
-  //
-  //   const token = jwt.sign({}, env.JWT_SECRET);
-  //
-  //   clearDownSolutionDB()
-  //     .then(() => Promise.all(fakeSolutions.map(x => solutionCreator(x))))
-  //     .then(() => {
-  //       request(app)
-  //         .get('/solution-service/v1/version')
-  //         .query({ fields: 'fact_find_id' })
-  //         .set('Authorization', `Bearer ${token}`)
-  //         .end((err, res) => {
-  //           assert.equal(res.status, 200);
-  //           assert.equal(res.body.length, 3);
-  //
-  //           const results = res.body;
-  //
-  //           assert.true(Joi.validate(results, Joi.array().items(
-  //             Joi.object().keys({
-  //               _id: Joi.string(),
-  //               fact_find_id: Joi.string(),
-  //             }))));
-  //         });
-  //     });
-  //
-  // });
+
+  t.test('should return all application versions with matching environment', assert => {
+
+    assert.plan(3);
+
+    const fakeApplicationVersions = [
+      { environment: 'environmenta', application_name: 'application_namea', version: 'versiona' },
+      { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb' },
+      { environment: 'environmentc', application_name: 'application_namec', version: 'versionc' },
+    ];
+
+    clearDownApplicationVersionDB()
+      .then(() => Promise.all(fakeApplicationVersions.map(x => applicationVersionCreator(x))))
+      .then(() => {
+        request(app)
+          .get('/version-service/v1/version')
+          .query({ environment: 'environmenta,environmentc' })
+          .end((err, res) => {
+            assert.equal(res.status, 200);
+            assert.equal(res.body.length, 2);
+
+            const results = res.body.map(({ environment, application_name, version }) => ({ environment, application_name, version }));
+
+            const expectedSolutions = [fakeApplicationVersions[2], fakeApplicationVersions[0]];
+
+            assert.deepEqual(results, expectedSolutions);
+          });
+      });
+
+  });
+
+  t.test('should only return specified fields', assert => {
+
+    assert.plan(3);
+
+    const fakeApplicationVersions = [
+      { environment: 'environmenta', application_name: 'application_namea', version: 'versiona' },
+      { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb' },
+      { environment: 'environmentc', application_name: 'application_namec', version: 'versionc' },
+    ];
+
+    clearDownApplicationVersionDB()
+      .then(() => Promise.all(fakeApplicationVersions.map(x => applicationVersionCreator(x))))
+      .then(() => {
+        request(app)
+          .get('/version-service/v1/version')
+          .query({ fields: 'environment' })
+          .end((err, res) => {
+            assert.equal(res.status, 200);
+            assert.equal(res.body.length, 3);
+
+            const results = res.body;
+
+            assert.true(Joi.validate(results, Joi.array().items(
+              Joi.object().keys({
+                _id: Joi.string(),
+                environment: Joi.string(),
+              }))));
+          });
+      });
+
+  });
 
 });

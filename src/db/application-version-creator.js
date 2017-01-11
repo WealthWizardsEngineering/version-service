@@ -1,12 +1,10 @@
 const ApplicationVersion = require('./application-version-model');
 
-module.exports = ({ fact_find_id, solution, suitability_report, statement_of_fact, solution_summary }) => {
+module.exports = ({ environment, application_name, version }) => {
   const f = new ApplicationVersion({
-    fact_find_id,
-    solution,
-    suitability_report,
-    statement_of_fact,
-    solution_summary,
+    environment,
+    application_name,
+    version,
   });
 
   return f.save();
