@@ -1,0 +1,44 @@
+version: '2'
+services:
+  node:
+    image: risingstack/alpine:3.3-v6.2.0-3.6.0
+    volumes:
+      - .:/usr/src/app:z
+    working_dir: /usr/src/app
+
+  npm:
+    extends:
+      service: node
+    entrypoint: npm
+
+  unit-test:
+    extends:
+      service: npm
+    command: run test:unit:report
+
+  mongodb:
+    image: mongo:3.2
+    ports:
+      - "27017:27017"
+    container_name: mongodb
+
+  component-test:
+    extends:
+      service: npm
+    command: run test:component:report
+    depends_on:
+      - mongodb
+    environment:
+      - PORT=3000
+      - CONTEXT_ROUTE=/version-service
+      - MONGODB_URL=mongodb://mongodb:27017/application_versions
+
+  dev:
+    extends:
+      service: npm
+    ports:
+      - "3000:80"
+    command: start
+    env_file: .env
+    depends_on:
+      - mongodb
