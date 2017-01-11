@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 const env = require('./env-vars');
 const apiRoutes = require('./routes');
-const Solution = require('./db/solution-model');
+const ApplicationVersion = require('./db/application-version-model');
 
 const app = express();
 
@@ -27,8 +27,8 @@ wwMonitoring.ping(contextRoute);
 wwMonitoring.health(contextRoute, [
   {
     type: 'mongo',
-    name: 'solution store',
-    model: Solution,
+    name: 'application version store',
+    model: ApplicationVersion,
   },
 ]);
 

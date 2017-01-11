@@ -32,7 +32,7 @@ test('application version model', (t) => {
       },
     };
 
-    const target = proxyquire('./solution-model', { mongoose: fakeMongoose });
+    const target = proxyquire('./application-version-model', { mongoose: fakeMongoose });
 
     assert.equal(target, 'ApplicationVersion:fakeSchema');
 

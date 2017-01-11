@@ -28,7 +28,7 @@ test('solution creator', t => {
       this.save = fakeSave;
     }
 
-    const target = proxyquire('./solution-creator', { './solution-model': solutionStub });
+    const target = proxyquire('./solution-creator', { './application-version-model': solutionStub });
 
     target(fakeData);
 

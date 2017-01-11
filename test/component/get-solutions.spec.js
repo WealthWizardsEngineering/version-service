@@ -1,7 +1,7 @@
 const test = require('tape');
 const request = require('supertest');
 const { app } = require('../../src/server');
-const Solution = require('../../src/db/solution-model');
+const Solution = require('../../src/db/application-version-model');
 const clearDownSolutionDB = () => Solution.remove();
 const solutionCreator = require('../../src/db/solution-creator');
 const jwt = require('jsonwebtoken');

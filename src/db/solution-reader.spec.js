@@ -20,7 +20,7 @@ test('getSolutions', t => {
       find: findStub,
     };
 
-    const { getSolutions } = proxyquire('./solution-reader', { './solution-model': solutionStub });
+    const { getSolutions } = proxyquire('./solution-reader', { './application-version-model': solutionStub });
     const target = getSolutions;
 
     target(fakeQuery, fakeProjection);
@@ -47,7 +47,7 @@ test('getSolution', t => {
       findById: findStub,
     };
 
-    const { getSolution } = proxyquire('./solution-reader', { './solution-model': solutionStub });
+    const { getSolution } = proxyquire('./solution-reader', { './application-version-model': solutionStub });
     const target = getSolution;
 
     target(fakeId);

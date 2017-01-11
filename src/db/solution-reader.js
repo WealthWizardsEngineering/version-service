@@ -1,4 +1,4 @@
-const ApplicationVersion = require('./solution-model');
+const ApplicationVersion = require('./application-version-model');
 
 const getSolutions = (query, projection) =>
   ApplicationVersion
