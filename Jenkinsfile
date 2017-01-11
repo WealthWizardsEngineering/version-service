@@ -1,7 +1,7 @@
 #!groovy
 
 def err = null
-def serviceName = 'solution-service'
+def serviceName = 'version-service'
 currentBuild.result = "SUCCESS"
 env.MAKEFILE_SUDO_COMMAND = "sudo -n"
 def lastCommitter = ''

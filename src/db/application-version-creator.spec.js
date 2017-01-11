@@ -2,9 +2,9 @@ const test = require('tape');
 const sinon = require('sinon');
 const proxyquire = require('proxyquire').noCallThru();
 
-test('solution creator', t => {
+test('application version creator', t => {
 
-  t.test('should create a new solution model and call save', assert => {
+  t.test('should create a new application version model and call save', assert => {
 
     assert.plan(7);
 
@@ -18,7 +18,7 @@ test('solution creator', t => {
 
     const fakeSave = sinon.spy();
 
-    function solutionStub(schema) {
+    function applicationVersionStub(schema) {
       assert.equal(schema.fact_find_id, fakeData.fact_find_id);
       assert.equal(schema.solution, fakeData.solution);
       assert.equal(schema.suitability_report, fakeData.suitability_report);
@@ -28,7 +28,7 @@ test('solution creator', t => {
       this.save = fakeSave;
     }
 
-    const target = proxyquire('./solution-creator', { './application-version-model': solutionStub });
+    const target = proxyquire('./application-version-creator', { './application-version-model': applicationVersionStub });
 
     target(fakeData);
 

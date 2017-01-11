@@ -10,37 +10,10 @@ basePath: /version-service/v1
 consumes:
   - application/json
 paths:
-  /solution:
-    post:
-      description: Creates a solution from a fact find
-      parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
-        - name: Solution
-          in: body
-          required: true
-          schema:
-            $ref: "#/definitions/SolutionCreate"
-      responses:
-        201:
-          description: Solution
-          schema:
-            $ref: '#/definitions/SolutionSuccessful'
-        401:
-          description: Authorization error
-        500:
-          description: Server error
-        502:
-          description: Upstream server error
+  /version:
     get:
-      description: Get all solutions
+      description: Get all versions
       parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
         - name: fact_find_id
           description: One or many (comma delimited) fact_find_ids to match
           in: query
@@ -57,17 +30,7 @@ paths:
           type: string
           required: false
 definitions:
-    SolutionCreate:
-      type: object
-      properties:
-        fact_find_id:
-          type: string
-        fact_find_data:
-          type: object
-      required:
-      - fact_find_id
-      - fact_find_data
-    SolutionSuccessful:
+    VersionSuccessful:
       type: object
       properties:
         _id:

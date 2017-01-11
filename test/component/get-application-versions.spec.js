@@ -1,25 +1,25 @@
 const test = require('tape');
 const request = require('supertest');
 const { app } = require('../../src/server');
-const Solution = require('../../src/db/application-version-model');
-const clearDownSolutionDB = () => Solution.remove();
-const solutionCreator = require('../../src/db/solution-creator');
+const ApplicationVersion = require('../../src/db/application-version-model');
+const clearDownApplicationVersionDB = () => ApplicationVersion.remove();
+const applicationVersionCreator = require('../../src/db/application-version-creator');
 const jwt = require('jsonwebtoken');
 const env = require('../../src/env-vars');
 const Joi = require('joi');
 
-test('get solutions', (t) => {
+test('get application versions', (t) => {
 
-  t.test('should return all solutions sorted by updated-at desc', assert => {
+  t.test('should return all application versions sorted by updated-at desc', assert => {
 
     assert.plan(3);
 
-    const fakeSolutionA = { fact_find_id: 'ffa', solution: { id: 'fake solution a' } };
-    const fakeSolutionB = { fact_find_id: 'ffb', solution: { id: 'fake solution b' } };
+    const fakeApplicationVersionA = { fact_find_id: 'ffa', solution: { id: 'fake solution a' } };
+    const fakeApplicationVersionB = { fact_find_id: 'ffb', solution: { id: 'fake solution b' } };
 
-    clearDownSolutionDB()
-      .then(() => solutionCreator(fakeSolutionA))
-      .then(() => solutionCreator(fakeSolutionB))
+    clearDownApplicationVersionDB()
+      .then(() => applicationVersionCreator(fakeApplicationVersionA))
+      .then(() => applicationVersionCreator(fakeApplicationVersionB))
       .then(() => {
         request(app)
           .get('/version-service/v1/version')
@@ -29,7 +29,7 @@ test('get solutions', (t) => {
 
             const results = res.body.map(({ fact_find_id, solution }) => ({ fact_find_id, solution }));
 
-            assert.deepEqual(results, [ fakeSolutionB, fakeSolutionA ]);
+            assert.deepEqual(results, [ fakeApplicationVersionB, fakeApplicationVersionA ]);
           });
       });
 
