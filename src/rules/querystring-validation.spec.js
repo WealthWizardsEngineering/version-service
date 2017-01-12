@@ -5,11 +5,16 @@ test('querystring validation', assert => {
 
   assert.plan(1);
 
+  const fakeDate = {
+    iso: () => 'iso',
+  };
+
   const fakeJoi = {
     object: () => ({
       keys: (keys) => keys,
     }),
     string: () => 'string',
+    date: () => fakeDate,
   };
 
   const target = proxyquire('./querystring-validation', { 'joi': fakeJoi });
@@ -19,6 +24,7 @@ test('querystring validation', assert => {
     environment: 'string',
     application_name: 'string',
     fields: 'string',
+    date: 'iso',
   };
 
   assert.deepEqual(target, expectedKeys);

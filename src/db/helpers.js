@@ -13,7 +13,7 @@ const buildQuery = whitelist => query =>
     .pick(whitelist)
     .mapValues((value) => {
       console.log(value)
-      if (!(value instanceof String) || value.indexOf(',') < 0) {
+      if (!("string" === typeof value) || value.indexOf(',') < 0) {
         return value;
       }
 
