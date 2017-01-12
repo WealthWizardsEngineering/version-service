@@ -46,7 +46,7 @@ test('get application versions', t => {
       'environment',
       'application_name',
       'version',
-      'created_at',
+      'date',
       'updated_at',
     ];
 

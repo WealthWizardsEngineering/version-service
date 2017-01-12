@@ -16,7 +16,7 @@ test('application version model', (t) => {
       assert.deepEqual(schema.environment, { type: String });
       assert.deepEqual(schema.application_name, { type: String });
       assert.deepEqual(schema.version, { type: String });
-      assert.deepEqual(options, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
+      assert.deepEqual(options, { timestamps: { createdAt: 'date', updatedAt: 'updated_at' } });
     }
 
     fakeSchema.Types = {
