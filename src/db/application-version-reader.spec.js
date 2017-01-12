@@ -13,7 +13,7 @@ test('getApplicationVersions', t => {
 
     const execSpy = sinon.spy();
     const selectStub = sinon.stub().withArgs(fakeProjection).returns({ exec: execSpy });
-    const sortStub = sinon.stub().withArgs({ update_at: 'desc' }).returns({ select: selectStub });
+    const sortStub = sinon.stub().withArgs({ date: 'desc' }).returns({ select: selectStub });
     const findStub = sinon.stub().withArgs(fakeQuery).returns({ sort: sortStub });
 
     const applicationVersionStub = {

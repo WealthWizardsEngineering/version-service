@@ -45,6 +45,7 @@
     "ww-jenkins-pipeline-utils": "^1.1.1"
   },
   "dependencies": {
+    "async": "^2.1.4",
     "bcryptjs": "2.3.0",
     "body-parser": "1.15.1",
     "co": "4.6.0",
