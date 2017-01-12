@@ -10,7 +10,7 @@ const Joi = require('joi');
 
 test('get application versions', (t) => {
 
-  t.test('should return all application versions sorted by updated-at desc', assert => {
+  t.test('should return all application versions sorted by date desc', assert => {
 
     assert.plan(3);
 

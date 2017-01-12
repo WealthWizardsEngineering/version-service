@@ -3,7 +3,7 @@ const ApplicationVersion = require('./application-version-model');
 const getApplicationVersions = (query, projection) =>
   ApplicationVersion
     .find(query)
-    .sort({ updated_at: 'desc' })
+    .sort({ date: 'desc' })
     .select(projection)
     .exec();
 

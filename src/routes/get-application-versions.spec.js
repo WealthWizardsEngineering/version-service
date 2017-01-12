@@ -47,7 +47,6 @@ test('get application versions', t => {
       'application_name',
       'version',
       'date',
-      'updated_at',
     ];
 
     const target = proxyquire('./get-application-versions', {
