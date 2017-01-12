@@ -1,7 +1,7 @@
 const { getEnvironments } = require('../db/environment-reader');
 const { buildQuery, buildProjection } = require('../db/helpers');
 
-const QUERY_WHITELIST = ['environment'];
+const QUERY_WHITELIST = ['environment', 'date'];
 const PROJECTION_WHITELIST = ['environment'];
 
 module.exports = (req, res) => {
