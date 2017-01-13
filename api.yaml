@@ -1,7 +1,7 @@
 ---
 swagger: '2.0'
 info:
-  version: 0.0.1
+  version: 1.0.0
   title: Version Service
   description: RESTful service to query aplication versions
 schemes:
@@ -14,16 +14,6 @@ paths:
     get:
       description: Get all versions
       parameters:
-        - name: fact_find_id
-          description: One or many (comma delimited) fact_find_ids to match
-          in: query
-          type: string
-          required: false
-        - name: _id
-          description: One or many (comma delimited) solution _ids to match
-          in: query
-          type: string
-          required: false
         - name: fields
           description: One or many (comma delimited) solution fields to return
           in: query
@@ -35,13 +25,15 @@ definitions:
       properties:
         _id:
           type: string
-        created_at:
+        date:
           type: string
           format: date-time
         updated_at:
           type: string
           format: date-time
-        fact_find_id:
+        environment:
           type: string
-        solution:
-          type: object
+        application_name:
+          type: string
+        version:
+          type: string
