@@ -8,13 +8,9 @@ test('getEnvironments', t => {
 
     assert.plan(2);
 
-    const fakeQuery = 'fake query';
-    const fakeProjection = 'fake projection';
-
-    const thenSpy = sinon.spy()
-    const execSpy = sinon.stub().returns({ then: thenSpy });
-    const distinctStub = sinon.stub().withArgs('application_name').returns({ exec: execSpy });
-    const findStub = sinon.stub().withArgs(fakeQuery).returns({ distinct: distinctStub });
+    const execSpy = sinon.spy();
+    const distinctStub = sinon.stub().withArgs('environment').returns({ exec: execSpy });
+    const findStub = sinon.stub().returns({ distinct: distinctStub });
 
     const applicationVersionStub = {
       find: findStub,
@@ -23,7 +19,7 @@ test('getEnvironments', t => {
     const { getEnvironments } = proxyquire('./environment-reader', { './application-version-model': applicationVersionStub });
     const target = getEnvironments;
 
-    target(fakeQuery, fakeProjection);
+    target();
 
     assert.true(execSpy.calledWithExactly());
     assert.true(execSpy.calledOnce);
