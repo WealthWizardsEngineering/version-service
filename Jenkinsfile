@@ -28,6 +28,7 @@ node {
   try {
 
         stage 'Checkout'
+          step([$class: 'WsCleanup'])
 
           checkout([$class: 'GitSCM', branches: [[name: env.BRANCH_NAME]], doGenerateSubmoduleConfigurations: false,
             extensions: [[$class: 'UserExclusion', excludedUsers: gitExcludedUsers]], submoduleCfg: [],
