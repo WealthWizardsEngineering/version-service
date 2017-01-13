@@ -111,6 +111,7 @@ node {
 
         err = caughtError
         currentBuild.result = "FAILURE"
+        try { bitbucketStatusNotify ( buildState: 'FAILED' ) } catch(all){ println "Bitbucket FAILED notify failure" }
 
         sh "git reset --hard"
 
