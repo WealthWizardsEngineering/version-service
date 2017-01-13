@@ -38,9 +38,9 @@ publish:
 
 clean-up:
 	${MAKEFILE_SUDO_COMMAND} ${NPM} prune
-	rm -rf .nyc_output node_modules coverage component-test-report.xml unit-test-report.xml
-	${DOCKER_COMPOSE} stop
-	${DOCKER_COMPOSE} rm -fv
+	${MAKEFILE_SUDO_COMMAND} ${DOCKER_RUN} ${DOCKER_BASE_IMAGE} rm -rf .nyc_output node_modules coverage component-test-report.xml unit-test-report.xml
+	${MAKEFILE_SUDO_COMMAND} ${DOCKER_COMPOSE} stop
+	${MAKEFILE_SUDO_COMMAND} ${DOCKER_COMPOSE} rm -fv
 .PHONY: clean-up
 
 dev:
