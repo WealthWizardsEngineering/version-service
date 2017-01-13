@@ -45,4 +45,25 @@ test('routes', (t) => {
 
   });
 
+  t.test('creates a GET route for /v1/environment/:id', assert => {
+
+    assert.plan(2);
+
+    const fakeApp = {
+      get: (route, ...middleware) => {
+        if (route === '/v1/environment/:id') {
+          assert.equal(route, '/v1/environment/:id');
+          assert.equal(middleware[1], 'get-environment');
+        }
+      },
+    };
+
+    const target = proxyquire('./', {
+      './get-environment': 'get-environment',
+    });
+
+    target(fakeApp);
+
+  });
+
 });
