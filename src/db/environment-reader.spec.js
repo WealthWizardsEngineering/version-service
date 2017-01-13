@@ -6,7 +6,7 @@ test('getEnvironments', t => {
 
   t.test('should pass query and projection ', assert => {
 
-    assert.plan(1);
+    assert.plan(2);
 
     const fakeQuery = 'fake query';
     const fakeProjection = 'fake projection';
@@ -25,36 +25,42 @@ test('getEnvironments', t => {
 
     target(fakeQuery, fakeProjection);
 
-    // assert.true(thenSpy.calledWithExactly());
+    assert.true(execSpy.calledWithExactly());
     assert.true(execSpy.calledOnce);
 
   });
 
 });
 
-// test('getApplicationVersion', t => {
-//
-//   t.test('should find by id', assert => {
-//
-//     assert.plan(2);
-//
-//     const fakeId = 'fake id';
-//
-//     const execSpy = sinon.spy();
-//     const findStub = sinon.stub().withArgs(fakeId).returns({ exec: execSpy });
-//
-//     applicationVersionStub = {
-//       findById: findStub,
-//     };
-//
-//     const { getApplicationVersion } = proxyquire('./application-version-reader', { './application-version-model': applicationVersionStub });
-//     const target = getApplicationVersion;
-//
-//     target(fakeId);
-//
-//     assert.true(execSpy.calledWithExactly());
-//     assert.true(execSpy.calledOnce);
-//
-//   });
-//
-// });
+test('getEnvironment', t => {
+
+  t.test('should find by id', assert => {
+
+    assert.plan(2);
+
+    const fakeId = 'fake id';
+
+    const fakeQuery = 'fake query';
+    const fakeProjection = 'fake projection';
+
+    const thenSpy = sinon.spy()
+    const execSpy = sinon.stub().returns({ then: thenSpy });
+    const distinctStub = sinon.stub().withArgs('application_name').returns({ exec: execSpy });
+    const whereStub = sinon.stub().withArgs(fakeId).returns({ distinct: distinctStub });
+    const findStub = sinon.stub().withArgs(fakeQuery).returns({ where: whereStub });
+
+    applicationVersionStub = {
+      find: findStub,
+    };
+
+    const { getEnvironment } = proxyquire('./environment-reader', { './application-version-model': applicationVersionStub });
+    const target = getEnvironment;
+
+    target(fakeQuery, fakeProjection, fakeId);
+
+    assert.true(execSpy.calledWithExactly());
+    assert.true(execSpy.calledOnce);
+
+  });
+
+});

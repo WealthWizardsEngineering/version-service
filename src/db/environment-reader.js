@@ -1,11 +1,6 @@
 const ApplicationVersion = require('./application-version-model');
 
 const getEnvironment = (query, projection, id) => {
-  if ( typeof query !== 'undefined' && query ) {
-    console.log(query)
-  } else {
-    console.log('undefined')
-  }
   applications_promise = ApplicationVersion.find()
     .where('environment', id)
     .distinct('application_name')
