@@ -30,7 +30,6 @@ services:
       - mongodb
     environment:
       - PORT=3000
-      - CONTEXT_ROUTE=/version-service
       - MONGODB_URL=mongodb://mongodb:27017/application_versions
 
   dev:
@@ -41,7 +40,6 @@ services:
     command: start
     environment:
       - PORT=80
-      - CONTEXT_ROUTE=/version-service
       - MONGODB_URL=mongodb://mongodb:27017/application_versions
     depends_on:
       - mongodb

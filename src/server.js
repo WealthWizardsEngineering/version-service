@@ -44,7 +44,7 @@ apiRoutes(contextRoute);
 
 contextRoute.use(wwLogging.errorHandler);
 
-app.use(env.CONTEXT_ROUTE, contextRoute);
+app.use('/version-service', contextRoute);
 
 app.shutdown = () => {
   mongoose.disconnect();

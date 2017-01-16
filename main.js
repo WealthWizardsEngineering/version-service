@@ -3,7 +3,7 @@ const env = require('./src/env-vars');
 const { app } = require('./src/server');
 
 const server = app.listen(env.PORT, () => {
-  console.log(`Listening on port ${env.PORT} with context route of ${env.CONTEXT_ROUTE}`);
+  console.log(`Listening on port ${env.PORT} with context route of /version-service`);
 });
 
 process.on('SIGTERM', () => {
