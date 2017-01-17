@@ -17,6 +17,7 @@ test('get environment', t => {
 
     const expectedWhitelist = [
       'date',
+      'product',
     ];
 
     const target = proxyquire('./get-environment', {

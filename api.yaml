@@ -35,6 +35,10 @@ paths:
           type: string
           format: date-type
           required: false
+        - name: product
+          in: query
+          type: string
+          required: false
       responses:
         200:
           description: A list of applications and the version deployed into the given environment

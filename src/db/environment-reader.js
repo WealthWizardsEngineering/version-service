@@ -1,8 +1,11 @@
 const ApplicationVersion = require('./application-version-model');
 
 const getEnvironment = (query, projection, id) => {
-  applications_promise = ApplicationVersion.find()
-    .where('environment', id)
+  appsRequest = ApplicationVersion.find();
+  if (query.product) {
+    appsRequest.where('product', query.product);
+  }
+  applications_promise = appsRequest.where('environment', id)
     .distinct('application_name')
     .exec();
   another_promise = applications_promise.then (function (applications) {
