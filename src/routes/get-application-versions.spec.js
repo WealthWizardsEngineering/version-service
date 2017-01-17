@@ -14,6 +14,7 @@ test('get application versions', t => {
       '_id',
       'environment',
       'application_name',
+      'product',
     ];
 
     const target = proxyquire('./get-application-versions', {
@@ -47,6 +48,7 @@ test('get application versions', t => {
       'application_name',
       'version',
       'date',
+      'product',
     ];
 
     const target = proxyquire('./get-application-versions', {

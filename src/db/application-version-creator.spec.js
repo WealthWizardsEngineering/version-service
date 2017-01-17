@@ -6,12 +6,13 @@ test('application version creator', t => {
 
   t.test('should create a new application version model and call save', assert => {
 
-    assert.plan(5);
+    assert.plan(6);
 
     const fakeData = {
       environment: 'a fake environment',
       application_name: 'a fake application name',
       version: 'a fake version',
+      product: 'a fake product',
     };
 
     const fakeSave = sinon.spy();
@@ -20,6 +21,7 @@ test('application version creator', t => {
       assert.equal(schema.environment, fakeData.environment);
       assert.equal(schema.application_name, fakeData.application_name);
       assert.equal(schema.version, fakeData.version);
+      assert.equal(schema.product, fakeData.product);
 
       this.save = fakeSave;
     }

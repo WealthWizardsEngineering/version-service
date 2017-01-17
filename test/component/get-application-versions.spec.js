@@ -14,8 +14,8 @@ test('get application versions', (t) => {
 
     assert.plan(3);
 
-    const fakeApplicationVersionA = { environment: 'environmenta', application_name: 'application_namea', version: 'versiona' };
-    const fakeApplicationVersionB = { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb' };
+    const fakeApplicationVersionA = { environment: 'environmenta', application_name: 'application_namea', version: 'versiona', product: 'producta' };
+    const fakeApplicationVersionB = { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb', product: 'productb' };
 
     clearDownApplicationVersionDB()
       .then(() => applicationVersionCreator(fakeApplicationVersionA))
@@ -27,7 +27,7 @@ test('get application versions', (t) => {
             assert.equal(res.status, 200);
             assert.equal(res.body.length, 2);
 
-            const results = res.body.map(({ environment, application_name, version }) => ({ environment, application_name, version }));
+            const results = res.body.map(({ environment, application_name, version, product }) => ({ environment, application_name, version, product }));
 
             assert.deepEqual(results, [ fakeApplicationVersionB, fakeApplicationVersionA ]);
           });
@@ -40,9 +40,9 @@ test('get application versions', (t) => {
     assert.plan(3);
 
     const fakeApplicationVersions = [
-      { environment: 'environmenta', application_name: 'application_namea', version: 'versiona' },
-      { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb' },
-      { environment: 'environmentc', application_name: 'application_namec', version: 'versionc' },
+      { environment: 'environmenta', application_name: 'application_namea', version: 'versiona', product: 'producta' },
+      { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb', product: 'productb' },
+      { environment: 'environmentc', application_name: 'application_namec', version: 'versionc', product: 'productc' },
     ];
 
     clearDownApplicationVersionDB()
@@ -55,7 +55,7 @@ test('get application versions', (t) => {
             assert.equal(res.status, 200);
             assert.equal(res.body.length, 2);
 
-            const results = res.body.map(({ environment, application_name, version }) => ({ environment, application_name, version }));
+            const results = res.body.map(({ environment, application_name, version, product }) => ({ environment, application_name, version, product }));
 
             const expectedSolutions = [fakeApplicationVersions[2], fakeApplicationVersions[0]];
 
@@ -70,9 +70,9 @@ test('get application versions', (t) => {
     assert.plan(3);
 
     const fakeApplicationVersions = [
-      { environment: 'environmenta', application_name: 'application_namea', version: 'versiona' },
-      { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb' },
-      { environment: 'environmentc', application_name: 'application_namec', version: 'versionc' },
+      { environment: 'environmenta', application_name: 'application_namea', version: 'versiona', product: 'producta' },
+      { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb', product: 'productb' },
+      { environment: 'environmentc', application_name: 'application_namec', version: 'versionc', product: 'productc' },
     ];
 
     clearDownApplicationVersionDB()

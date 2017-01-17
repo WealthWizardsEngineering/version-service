@@ -25,6 +25,7 @@ test('querystring validation', assert => {
     application_name: 'string',
     fields: 'string',
     date: 'iso',
+    product: 'string',
   };
 
   assert.deepEqual(target, expectedKeys);

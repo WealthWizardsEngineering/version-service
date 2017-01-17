@@ -14,8 +14,8 @@ test('get environment', (t) => {
 
     assert.plan(3);
 
-    const fakeApplicationVersionA = { environment: 'environmenta', application_name: 'application_namea', version: 'versiona' };
-    const fakeApplicationVersionB = { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb' };
+    const fakeApplicationVersionA = { environment: 'environmenta', application_name: 'application_namea', version: 'versiona', product: 'producta' };
+    const fakeApplicationVersionB = { environment: 'environmentb', application_name: 'application_nameb', version: 'versionb', product: 'productb' };
 
     clearDownApplicationVersionDB()
       .then(() => applicationVersionCreator(fakeApplicationVersionA))

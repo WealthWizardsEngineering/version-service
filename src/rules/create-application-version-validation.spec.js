@@ -13,6 +13,7 @@ test('create application version validation', t => {
       }),
       string: () => ({
         required: () => 'string:required',
+        optional: () => 'string:optional',
       }),
     };
 
@@ -22,6 +23,7 @@ test('create application version validation', t => {
       environment: 'string:required',
       application_name: 'string:required',
       version: 'string:required',
+      product: 'string:optional',
     };
 
     assert.deepEqual(target, expectedKeys);

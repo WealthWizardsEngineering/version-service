@@ -1,8 +1,8 @@
 const { getApplicationVersions } = require('../db/application-version-reader');
 const { buildQuery, buildProjection } = require('../db/helpers');
 
-const QUERY_WHITELIST = ['_id', 'environment', 'application_name'];
-const PROJECTION_WHITELIST = ['_id', 'environment', 'application_name', 'version', 'date'];
+const QUERY_WHITELIST = ['_id', 'environment', 'application_name', 'product'];
+const PROJECTION_WHITELIST = ['_id', 'environment', 'application_name', 'version', 'date', 'product'];
 
 module.exports = (req, res) => {
 

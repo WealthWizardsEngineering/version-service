@@ -12,9 +12,9 @@ test('create application versions', (t) => {
 
   t.test('should create an application version correctly', assert => {
 
-    assert.plan(5);
+    assert.plan(6);
 
-    const fakeApplicationVersion = { environment: 'environmenta', application_name: 'application_namea', version: 'versiona' };
+    const fakeApplicationVersion = { environment: 'environmenta', application_name: 'application_namea', version: 'versiona', product: 'producta' };
 
     clearDownApplicationVersionDB()
       .then(() => {
@@ -29,6 +29,7 @@ test('create application versions', (t) => {
                 assert.equal(result.environment, fakeApplicationVersion.environment);
                 assert.equal(result.application_name, fakeApplicationVersion.application_name);
                 assert.equal(result.version, fakeApplicationVersion.version);
+                assert.equal(result.product, fakeApplicationVersion.product);
               });
           });
       });

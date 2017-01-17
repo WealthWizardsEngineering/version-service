@@ -6,6 +6,7 @@ const querystringValidation = Joi.object().keys({
   application_name: Joi.string(),
   fields: Joi.string(),
   date: Joi.date().iso(),
+  product: Joi.string(),
 });
 
 module.exports = querystringValidation;
