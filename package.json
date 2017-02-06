@@ -8,7 +8,7 @@
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "test:unit": "tape 'src/**/*.spec.js'",
+    "test:unit": "tape 'test/unit/**/*.spec.js'",
     "test:unit:watch": "nodemon -q -x 'npm run test:unit | tap-spec --silent'",
     "test:unit:coverage": "nyc --report-dir=coverage/unit --reporter=text --reporter=html npm run test:unit",
     "test:unit:report": "npm run test:unit:coverage | tee /dev/stderr | node_modules/tap-xunit/bin/tap-xunit > unit-test-report.xml",

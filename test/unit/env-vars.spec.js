@@ -9,7 +9,7 @@ test('that env vars are validated', (t) => {
   envalidStub.bool = sinon.stub().returns('bool');
   envalidStub.cleanEnv = sinon.stub();
 
-  proxyquire('./env-vars', {
+  proxyquire('../../src/env-vars', {
     envalid: envalidStub,
     './logger': { info: () => {} },
   });

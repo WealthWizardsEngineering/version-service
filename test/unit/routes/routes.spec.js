@@ -16,7 +16,7 @@ test('routes', (t) => {
       get: () => {},
     };
 
-    const target = proxyquire('./', {
+    const target = proxyquire('../../../src/routes/', {
       '../rules/create-application-version-validation': 'create-application-version-validation',
       './create-application-version': 'create-application-version',
       'ww-validation': {
@@ -42,7 +42,7 @@ test('routes', (t) => {
       },
     };
 
-    const target = proxyquire('./', {
+    const target = proxyquire('../../../src/routes/', {
       './get-application-versions': 'get-application-versions',
     });
 
@@ -64,7 +64,7 @@ test('routes', (t) => {
       },
     };
 
-    const target = proxyquire('./', {
+    const target = proxyquire('../../../src/routes/', {
       './get-environments': 'get-environments',
     });
 
@@ -86,7 +86,7 @@ test('routes', (t) => {
       },
     };
 
-    const target = proxyquire('./', {
+    const target = proxyquire('../../../src/routes/', {
       './get-environment': 'get-environment',
     });
 

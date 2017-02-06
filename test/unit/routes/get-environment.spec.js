@@ -2,22 +2,25 @@ const test = require('tape');
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 
-test('get application versions', t => {
+test('get environment', t => {
 
   t.test('should build query from whitelist', assert => {
-
     assert.plan(1);
 
-    const fakeReq = { query: {} };
+    const fakeId = 'fake id';
+    const fakeReq = {
+      query: {},
+      params: {
+        id: fakeId,
+      },
+    };
 
     const expectedWhitelist = [
-      '_id',
-      'environment',
-      'application_name',
+      'date',
       'product',
     ];
 
-    const target = proxyquire('./get-application-versions', {
+    const target = proxyquire('../../../src/routes/get-environment', {
       '../db/helpers': {
         buildQuery: (whitelist) => {
           assert.deepEqual(whitelist, expectedWhitelist);
@@ -27,31 +30,29 @@ test('get application versions', t => {
         buildProjection: () => () => {
         },
       },
-      '../db/application-version-reader': {
-        getApplicationVersions: () => Promise.resolve(),
+      '../db/environment-reader': {
+        getEnvironment: () => Promise.resolve(),
       },
     });
 
     target(fakeReq);
-
   });
 
   t.test('should build projection from whitelist', assert => {
-
     assert.plan(1);
 
-    const fakeReq = { query: {} };
+    const fakeId = 'fake id';
+    const fakeReq = {
+      query: {},
+      params: {
+        id: fakeId,
+      },
+    };
 
     const expectedWhitelist = [
-      '_id',
-      'environment',
-      'application_name',
-      'version',
-      'date',
-      'product',
     ];
 
-    const target = proxyquire('./get-application-versions', {
+    const target = proxyquire('../../../src/routes/get-environment', {
       '../db/helpers': {
         buildProjection: (whitelist) => {
           assert.deepEqual(whitelist, expectedWhitelist);
@@ -61,8 +62,8 @@ test('get application versions', t => {
         buildQuery: () => () => {
         },
       },
-      '../db/application-version-reader': {
-        getApplicationVersions: () => Promise.resolve(),
+      '../db/environment-reader': {
+        getEnvironment: () => Promise.resolve(),
       },
     });
 
@@ -70,18 +71,23 @@ test('get application versions', t => {
 
   });
 
-  t.test('should send results from application version reader', assert => {
+  t.test('should send results from environment reader', assert => {
+    assert.plan(6);
 
-    assert.plan(5);
-
-    const fakeReq = { query: { fields: 'fake fields' } };
+    const fakeId = 'fake id';
+    const fakeReq = {
+      query: {},
+      params: {
+        id: fakeId,
+      },
+    };
     const fakeRes = { send: sinon.spy() };
 
     const fakeQuery = 'fake query';
     const fakeProjection = 'fake projection';
     const fakeResults = 'fake results';
 
-    const target = proxyquire('./get-application-versions', {
+    const target = proxyquire('../../../src/routes/get-environment', {
       '../db/helpers': {
         buildQuery: () => query => {
           assert.deepEqual(query, fakeReq.query);
@@ -94,10 +100,11 @@ test('get application versions', t => {
           return fakeProjection;
         },
       },
-      '../db/application-version-reader': {
-        getApplicationVersions: (query, projection) => {
+      '../db/environment-reader': {
+        getEnvironment: (query, projection, id) => {
           assert.equal(query, fakeQuery);
           assert.equal(projection, fakeProjection);
+          assert.equal(id, fakeId);
 
           return Promise.resolve(fakeResults);
         },

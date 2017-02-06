@@ -1,6 +1,6 @@
 const test = require('tape');
 const proxyquire = require('proxyquire').noCallThru();
-const { buildQuery, buildProjection } = require('./helpers');
+const { buildQuery, buildProjection } = require('../../../src/db/helpers');
 
 test('build query', t => {
 
@@ -118,7 +118,7 @@ test('write file', t => {
     const fakeDb = 'fake db';
     const fakeMongo = 'fake mongo';
 
-    const { writeFile } = proxyquire('./helpers', {
+    const { writeFile } = proxyquire('../../../src/db/helpers', {
       'gridfs-stream': (db, mongo) => {
         const actual = { db, mongo };
         const expected = { db: fakeDb, mongo: fakeMongo };
@@ -143,7 +143,7 @@ test('write file', t => {
 
     const fakeFilename = 'fake filename';
 
-    const { writeFile } = proxyquire('./helpers', {
+    const { writeFile } = proxyquire('../../../src/db/helpers', {
       'gridfs-stream': () => ({
         createWriteStream: ({ filename }) => {
           const actual = filename;
@@ -175,7 +175,7 @@ test('write file', t => {
       close: cb => cb(fakeFile),
     };
 
-    const { writeFile } = proxyquire('./helpers', {
+    const { writeFile } = proxyquire('../../../src/db/helpers', {
       'gridfs-stream': () => ({
         createWriteStream: () => ({
           on: (type, cb) => mockEvents[type](cb),
@@ -207,7 +207,7 @@ test('read file', t => {
     const fakeDb = 'fake db';
     const fakeMongo = 'fake mongo';
 
-    const { readFile } = proxyquire('./helpers', {
+    const { readFile } = proxyquire('../../../src/db/helpers', {
       'gridfs-stream': (db, mongo) => {
         const actual = { db, mongo };
         const expected = { db: fakeDb, mongo: fakeMongo };
@@ -232,7 +232,7 @@ test('read file', t => {
 
     const fakeId = 'fake id';
 
-    const { readFile } = proxyquire('./helpers', {
+    const { readFile } = proxyquire('../../../src/db/helpers', {
       'gridfs-stream': () => ({
         createReadStream: ({ _id }) => {
           const actual = _id;
@@ -259,7 +259,7 @@ test('read file', t => {
 
     const fakeReadStream = 'fake read stream';
 
-    const { readFile } = proxyquire('./helpers', {
+    const { readFile } = proxyquire('../../../src/db/helpers', {
       'gridfs-stream': () => ({
         createReadStream: () => fakeReadStream,
       }),

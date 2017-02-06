@@ -26,7 +26,7 @@ test('application version creator', t => {
       this.save = fakeSave;
     }
 
-    const target = proxyquire('./application-version-creator', { './application-version-model': applicationVersionStub });
+    const target = proxyquire('../../../src/db/application-version-creator', { './application-version-model': applicationVersionStub });
 
     target(fakeData);
 

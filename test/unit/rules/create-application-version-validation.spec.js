@@ -17,7 +17,7 @@ test('create application version validation', t => {
       }),
     };
 
-    const target = proxyquire('./create-application-version-validation', { 'joi': fakeJoi });
+    const target = proxyquire('../../../src/rules/create-application-version-validation', { 'joi': fakeJoi });
 
     const expectedKeys = {
       environment: 'string:required',

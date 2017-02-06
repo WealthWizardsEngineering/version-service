@@ -17,7 +17,7 @@ test('querystring validation', assert => {
     date: () => fakeDate,
   };
 
-  const target = proxyquire('./querystring-validation', { 'joi': fakeJoi });
+  const target = proxyquire('../../../src/rules/querystring-validation', { 'joi': fakeJoi });
 
   const expectedKeys = {
     _id: 'string',
