@@ -77,6 +77,13 @@ node {
                buildVersion = sh(script: 'npm version patch', returnStdout: true);
                buildVersion = buildVersion.substring(1);
             }
+
+           stage('SonarQube analysis') {
+            def scannerHome = tool 'SonarQube Scanner 2.8';
+            withSonarQubeEnv('sonarqube.devwizards.co.uk') {
+              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${serviceName} -Dsonar.projectName=${serviceName} -Dsonar.projectVersion=${buildVersion}"
+            }
+          }
         }
 
         stage 'Build docker image'
