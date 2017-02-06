@@ -9,7 +9,7 @@ test('get environments', assert => {
   const fakeReq = {};
   const fakeRes = { send: sinon.spy() };
 
-  const target = proxyquire('./get-environments', {
+  const target = proxyquire('../../../src/routes/get-environments', {
     '../db/environment-reader': {
       getEnvironments: () => Promise.resolve(fakeResults),
     },

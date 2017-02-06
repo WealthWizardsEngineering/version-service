@@ -8,12 +8,12 @@
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "test:unit": "tape 'src/**/*.spec.js'",
+    "test:unit": "tape 'test/unit/**/*.spec.js'",
     "test:unit:watch": "nodemon -q -x 'npm run test:unit | tap-spec --silent'",
-    "test:unit:coverage": "nyc --report-dir=coverage/unit --reporter=text --reporter=html npm run test:unit",
+    "test:unit:coverage": "nyc --report-dir=coverage/unit --reporter=text --reporter=html --reporter=lcov npm run test:unit",
     "test:unit:report": "npm run test:unit:coverage | tee /dev/stderr | node_modules/tap-xunit/bin/tap-xunit > unit-test-report.xml",
     "test:component": "tape 'test/component/**/*.spec.js'",
-    "test:component:coverage": "nyc --report-dir=coverage/component --reporter=text --reporter=html npm run test:component",
+    "test:component:coverage": "nyc --report-dir=coverage/component --reporter=text --reporter=html --reporter=lcov npm run test:component",
     "test:component:report": "npm run test:component:coverage | tee /dev/stderr | node_modules/tap-xunit/bin/tap-xunit > component-test-report.xml",
     "lint": "eslint *.js",
     "lint:fix": "eslint --fix *.js"

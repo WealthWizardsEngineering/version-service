@@ -16,7 +16,7 @@ test('getEnvironments', t => {
       find: findStub,
     };
 
-    const { getEnvironments } = proxyquire('./environment-reader', { './application-version-model': applicationVersionStub });
+    const { getEnvironments } = proxyquire('../../../src/db/environment-reader', { './application-version-model': applicationVersionStub });
     const target = getEnvironments;
 
     target();
@@ -49,7 +49,7 @@ test('getEnvironment', t => {
       find: findStub,
     };
 
-    const { getEnvironment } = proxyquire('./environment-reader', { './application-version-model': applicationVersionStub });
+    const { getEnvironment } = proxyquire('../../../src/db/environment-reader', { './application-version-model': applicationVersionStub });
     const target = getEnvironment;
 
     target(fakeQuery, fakeProjection, fakeId);

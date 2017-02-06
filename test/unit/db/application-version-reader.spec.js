@@ -20,7 +20,7 @@ test('getApplicationVersions', t => {
       find: findStub,
     };
 
-    const { getApplicationVersions } = proxyquire('./application-version-reader', { './application-version-model': applicationVersionStub });
+    const { getApplicationVersions } = proxyquire('../../../src/db/application-version-reader', { './application-version-model': applicationVersionStub });
     const target = getApplicationVersions;
 
     target(fakeQuery, fakeProjection);
@@ -47,7 +47,7 @@ test('getApplicationVersion', t => {
       findById: findStub,
     };
 
-    const { getApplicationVersion } = proxyquire('./application-version-reader', { './application-version-model': applicationVersionStub });
+    const { getApplicationVersion } = proxyquire('../../../src/db/application-version-reader', { './application-version-model': applicationVersionStub });
     const target = getApplicationVersion;
 
     target(fakeId);

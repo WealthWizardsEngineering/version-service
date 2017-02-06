@@ -20,7 +20,7 @@ test('create application version', (t) => {
     };
     const fakeNext = sinon.spy();
 
-    const target = proxyquire('./create-application-version', {
+    const target = proxyquire('../../../src/routes/create-application-version', {
       '../db/application-version-creator': (body) => {
         t.equal(body, fakeReq.body);
         return Promise.resolve(fakeResult)
@@ -50,7 +50,7 @@ test('create application version', (t) => {
 
     const fakeInternalServerError = 'fake internal server error';
 
-    const target = proxyquire('./create-application-version', {
+    const target = proxyquire('../../../src/routes/create-application-version', {
       '../db/application-version-creator': () => {
         return Promise.reject()
       },
