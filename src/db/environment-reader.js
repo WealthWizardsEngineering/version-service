@@ -1,18 +1,18 @@
 const ApplicationVersion = require('./application-version-model');
 
 const getEnvironment = (query, projection, id) => {
-  appsRequest = ApplicationVersion.find();
+  const appsRequest = ApplicationVersion.find();
   if (query.product) {
     appsRequest.where('product', query.product);
   }
-  applications_promise = appsRequest.where('environment', id)
+  const applications_promise = appsRequest.where('environment', id)
     .distinct('application_name')
     .exec();
-  another_promise = applications_promise.then (function (applications) {
-    return new Promise ( function (resolve, reject) {
+  const another_promise = applications_promise.then (function (applications) {
+    return new Promise ( function (resolve) {
       var async = require('async');
       async.map(applications, function(item, cb) {
-        request = ApplicationVersion.find();
+        const request = ApplicationVersion.find();
         request.where('environment', id);
         if (query.date) {
           request.where('date').lte(query.date);
@@ -23,7 +23,8 @@ const getEnvironment = (query, projection, id) => {
           .sort('-date')
           .limit(1)
           .exec(function(err, results) {
-            if (err) throw err;
+            if (err)
+              throw err;
             if ( typeof results !== 'undefined' && results && results[0] !== 'undefined' && results[0] ) {
               cb(null, {application_name: item, version: results[0].version});
             }
