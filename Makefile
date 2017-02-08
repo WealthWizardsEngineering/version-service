@@ -21,12 +21,10 @@ lint:
 
 unit-test:
 	${MAKEFILE_SUDO_COMMAND} ${DOCKER_RUN} unit-test
-	${MAKEFILE_SUDO_COMMAND} ${DOCKER_RUN} -e NODE_ENV=${NODE_ENV} ${DOCKER_BASE_IMAGE} sed -i -- 's/\/usr\/src\/app\///g' coverage/unit/lcov.info
 .PHONY: unit-test
 
 component-test:
 	${MAKEFILE_SUDO_COMMAND} ${DOCKER_RUN} component-test
-	${MAKEFILE_SUDO_COMMAND} ${DOCKER_RUN} -e NODE_ENV=${NODE_ENV} ${DOCKER_BASE_IMAGE} $sed -i -- 's/\/usr\/src\/app\////g' coverage/component/lcov.info
 .PHONY: component-test
 
 dependency-check:
