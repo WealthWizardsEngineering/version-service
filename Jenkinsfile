@@ -8,8 +8,9 @@ def lastCommitter = ''
 def buildVersion = '';
 
 fileLoader.withGit('https://bitbucket.org/wealth-wizards/jenkinsfile-commons.git', 'master', 'b75efdbe-575f-4d19-aff1-dc4c321ddfaf', '') {
-    docker = fileLoader.load('docker');
-    k8s = fileLoader.load('k8s');
+  docker = fileLoader.load('docker');
+  k8s = fileLoader.load('k8s');
+  sonarqube = fileLoader.load('sonarqube');
 }
 
 node {
@@ -77,13 +78,10 @@ node {
                buildVersion = sh(script: 'npm version patch', returnStdout: true);
                buildVersion = buildVersion.substring(1);
             }
+	}
 
-           stage('SonarQube analysis') {
-            def scannerHome = tool 'SonarQube Scanner 2.8';
-            withSonarQubeEnv('sonarqube.devwizards.co.uk') {
-              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${serviceName} -Dsonar.projectName=${serviceName} -Dsonar.projectVersion=${buildVersion}"
-            }
-          }
+        stage('SonarQube analysis') {
+          sonarqube.analyse(serviceName, buildVersion);
         }
 
         stage 'Build docker image'
