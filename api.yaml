@@ -5,7 +5,7 @@ info:
   title: Version Service
   description: RESTful service to create and query application version
 schemes:
-  - http
+  - https
 basePath: /version-service/v1
 consumes:
   - application/json
