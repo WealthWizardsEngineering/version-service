@@ -1,7 +1,7 @@
 version: '2'
 services:
   node:
-    image: risingstack/alpine:3.3-v6.2.0-3.6.0
+    image: wealthwizardsengineering/ww-base-node:alpine-latest
     volumes:
       - .:/usr/src/app:z
     working_dir: /usr/src/app
@@ -17,7 +17,7 @@ services:
     command: run test:unit:report
 
   mongodb:
-    image: mongo:3.2
+    image: mongo:3.4
     ports:
       - "27017:27017"
     container_name: mongodb

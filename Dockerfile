@@ -1,4 +1,4 @@
-FROM risingstack/alpine:3.3-v6.2.0-3.6.0
+FROM wealthwizardsengineering/ww-base-node:alpine-latest
 
 COPY package.json package.json
 COPY .npmrc .npmrc
