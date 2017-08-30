@@ -27,6 +27,10 @@ component-test:
 	${MAKEFILE_SUDO_COMMAND} ${DOCKER_RUN} component-test
 .PHONY: component-test
 
+release:
+	@npm version patch
+.PHONY: release
+
 dependency-check:
 	./node_modules/.bin/nsp check
 .PHONY: dependency-check
