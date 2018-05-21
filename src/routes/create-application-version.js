@@ -1,4 +1,5 @@
-const { ErrorCodes, ApiError } = require('ww-utils');
+const ApiError = require('../api-error')
+const ErrorCodes = require('../error-codes')
 const createApplicationVersion = require('../db/application-version-creator');
 
 module.exports = (req, res, next) => {

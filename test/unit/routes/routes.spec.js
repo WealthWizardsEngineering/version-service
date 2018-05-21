@@ -8,6 +8,8 @@ test('routes', (t) => {
     assert.plan(3);
 
     const fakeApp = {
+      get: () => {},
+      get: () => {},
       post: (route, ...middleware) => {
         assert.equal(route, '/v1/version');
         assert.deepEqual(middleware[0], { body: 'create-application-version-validation' }, 'create application version validation correct');
@@ -19,9 +21,7 @@ test('routes', (t) => {
     const target = proxyquire('../../../src/routes/', {
       '../rules/create-application-version-validation': 'create-application-version-validation',
       './create-application-version': 'create-application-version',
-      'ww-validation': {
-        requestValidator: (rule) => rule
-      }
+      '../request-validator': (rule) => rule
     });
 
     target(fakeApp);
@@ -33,6 +33,8 @@ test('routes', (t) => {
     assert.plan(2);
 
     const fakeApp = {
+      get: () => {},
+      get: () => {},
       post: () => {},
       get: (route, ...middleware) => {
         if (route === '/v1/version') {
@@ -55,6 +57,8 @@ test('routes', (t) => {
     assert.plan(2);
 
     const fakeApp = {
+      get: () => {},
+      get: () => {},
       post: () => {},
       get: (route, ...middleware) => {
         if (route === '/v1/environment') {
@@ -77,6 +81,8 @@ test('routes', (t) => {
     assert.plan(2);
 
     const fakeApp = {
+      get: () => {},
+      get: () => {},
       post: () => {},
       get: (route, ...middleware) => {
         if (route === '/v1/environment/:id') {

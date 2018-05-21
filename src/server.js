@@ -2,14 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const responseTime = require('response-time');
 const helmet = require('helmet');
-const wwLogging = require('ww-logging');
-const wwMonitoring = require('ww-monitoring');
-const wwUtils = require('ww-utils');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 const env = require('./env-vars');
 const apiRoutes = require('./routes');
-const ApplicationVersion = require('./db/application-version-model');
+const errorHandler = require('./error-handler');
+const requestLogger = require('./request-logger');
 
 const app = express();
 
@@ -19,18 +17,7 @@ mongoose.connect(env.MONGODB_URL);
 
 contextRoute.use(helmet());
 
-contextRoute.use(wwLogging.requestId);
-contextRoute.use(wwLogging.requestLogger);
-contextRoute.use(wwLogging.correlationId);
-
-wwMonitoring.ping(contextRoute);
-wwMonitoring.health(contextRoute, [
-  {
-    type: 'mongo',
-    name: 'application version store',
-    model: ApplicationVersion,
-  },
-]);
+contextRoute.use(requestLogger);
 
 contextRoute.use(responseTime());
 
@@ -39,10 +26,9 @@ contextRoute.use(bodyParser.urlencoded({
 }));
 contextRoute.use(bodyParser.json());
 
-wwUtils.apiDocRoutes(contextRoute);
 apiRoutes(contextRoute);
 
-contextRoute.use(wwLogging.errorHandler);
+contextRoute.use(errorHandler);
 
 app.use('/version-service', contextRoute);
 

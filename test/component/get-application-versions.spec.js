@@ -4,8 +4,6 @@ const { app } = require('../../src/server');
 const ApplicationVersion = require('../../src/db/application-version-model');
 const clearDownApplicationVersionDB = () => ApplicationVersion.remove();
 const applicationVersionCreator = require('../../src/db/application-version-creator');
-const jwt = require('jsonwebtoken');
-const env = require('../../src/env-vars');
 const Joi = require('joi');
 
 test('get application versions', (t) => {
@@ -57,7 +55,7 @@ test('get application versions', (t) => {
 
             const results = res.body.map(({ environment, application_name, version, product }) => ({ environment, application_name, version, product }));
 
-            const expectedSolutions = [fakeApplicationVersions[2], fakeApplicationVersions[0]];
+            const expectedSolutions = [fakeApplicationVersions[0], fakeApplicationVersions[2]];
 
             assert.deepEqual(results, expectedSolutions);
           });

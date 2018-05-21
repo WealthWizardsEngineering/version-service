@@ -3,7 +3,7 @@ const logger = require('./logger');
 const { str, num } = envalid;
 
 const env = envalid.cleanEnv(process.env, {
-  PORT: num(),
+  PORT: num({ default: 80 }),
   MONGODB_URL: str(),
 });
 

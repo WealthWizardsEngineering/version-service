@@ -11,7 +11,6 @@ NPM ?= ${DOCKER_RUN} -e NODE_ENV=${NODE_ENV} ${DOCKER_BASE_IMAGE} npm
 all: clean-up install lint unit-test component-test
 
 install:
-	${MAKEFILE_SUDO_COMMAND} ${NPM} install tap-xunit
 	${MAKEFILE_SUDO_COMMAND} ${NPM} install
 .PHONY: install
 
@@ -32,7 +31,7 @@ release:
 .PHONY: release
 
 dependency-check:
-	./node_modules/.bin/nsp check
+	${MAKEFILE_SUDO_COMMAND} ${NPM} run dependency-check
 .PHONY: dependency-check
 
 publish:

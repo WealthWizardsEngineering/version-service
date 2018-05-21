@@ -4,9 +4,6 @@ const { app } = require('../../src/server');
 const ApplicationVersion = require('../../src/db/application-version-model');
 const clearDownApplicationVersionDB = () => ApplicationVersion.remove();
 const applicationVersionReader = require('../../src/db/application-version-reader');
-const jwt = require('jsonwebtoken');
-const env = require('../../src/env-vars');
-const Joi = require('joi');
 
 test('create application versions', (t) => {
 
