@@ -42,6 +42,7 @@ jobs:
             git config --global user.email "circleci@wealthwizards.com"
             git config --global user.name "Circle CI"
             npm version patch -m "Release %s [ci skip]" > .version
+            sed -i 's/^v//g' .version
       - run:
           name : build-docker-image
           command: |
