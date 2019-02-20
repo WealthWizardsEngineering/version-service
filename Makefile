@@ -30,10 +30,6 @@ release:
 	@npm version patch
 .PHONY: release
 
-dependency-check:
-	${MAKEFILE_SUDO_COMMAND} ${NPM} run dependency-check
-.PHONY: dependency-check
-
 publish:
 	npm version `./node_modules/.bin/conventional-recommended-bump -p angular`
 	${MAKEFILE_SUDO_COMMAND} ${NPM} publish

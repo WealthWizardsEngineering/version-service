@@ -17,8 +17,7 @@
     "test:unit:coverage": "nyc --report-dir=coverage/unit --reporter=text --reporter=html --reporter=lcov npm run test:unit",
     "test:component": "tape 'test/component/**/*.spec.js'",
     "lint": "eslint *.js",
-    "lint:fix": "eslint --fix *.js",
-    "dependency-check": "nsp check"
+    "lint:fix": "eslint --fix *.js"
   },
   "author": "Wealth Wizards",
   "license": "MIT",
@@ -30,7 +29,6 @@
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-plugin-import": "2.12.0",
     "node-mocks-http": "1.5.8",
-    "nsp": "3.2.1",
     "nyc": "11.8.0",
     "proxyquire": "2.0.1",
     "sinon": "5.0.7",
