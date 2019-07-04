@@ -17,7 +17,9 @@
     "test:unit:coverage": "nyc --report-dir=coverage/unit --reporter=text --reporter=html --reporter=lcov npm run test:unit",
     "test:component": "tape 'test/component/**/*.spec.js'",
     "lint": "eslint *.js",
-    "lint:fix": "eslint --fix *.js"
+    "lint:fix": "eslint --fix *.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Wealth Wizards",
   "license": "MIT",
@@ -50,6 +52,8 @@
     "lodash": "4.17.11",
     "mongoose": "5.4.14",
     "nocache": "2.0.0",
-    "response-time": "2.3.2"
-  }
+    "response-time": "2.3.2",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
