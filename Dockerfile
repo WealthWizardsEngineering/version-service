@@ -1,4 +1,4 @@
-FROM quay.io/wealthwizards/ww-base-node:alpine-6
+FROM quay.io/wealthwizards/ww-base-node:alpine-10
 
 COPY package.json package.json
 ENV NODE_ENV=production
