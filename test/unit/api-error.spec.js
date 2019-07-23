@@ -16,18 +16,4 @@ test('Error codes', (t) => {
 
     t.end();
   });
-
-  t.test('Create an error and check it handles capture stack trace undefined (by not throwing error)', (t) => {
-    // Better way of doing this??
-    Error.captureStackTrace = undefined;
-
-    const error = new ApiError(
-      `Some resource not found error`,
-      ErrorCodes.RESOURCE_NOT_FOUND,
-      404
-    );
-
-    t.end();
-  });
-
 });
