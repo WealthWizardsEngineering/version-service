@@ -24,7 +24,7 @@
   "author": "Wealth Wizards",
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "10.0.2",
+    "babel-eslint": "10.1.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "6.24.1",
     "eslint": "6.8.0",
