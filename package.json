@@ -1,6 +1,6 @@
 {
   "name": "version-service",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "engines": {
     "node": "^6.14.2"
   },
