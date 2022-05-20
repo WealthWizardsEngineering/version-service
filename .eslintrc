@@ -1,16 +1,10 @@
 {
   "extends": "airbnb-base",
-  "parser": "babel-eslint",
   "parserOptions":{
     "ecmaFeatures": {
       "classes": true,
       "experimentalObjectRestSpread": true
     }
-  },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "node": true
   },
   "rules": {
     "new-cap": 1,

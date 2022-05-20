@@ -9,6 +9,7 @@ test('get application versions', t => {
     assert.plan(1);
 
     const fakeReq = { query: {} };
+    const fakeRes = { send: sinon.spy() };
 
     const expectedWhitelist = [
       '_id',
@@ -32,7 +33,7 @@ test('get application versions', t => {
       },
     });
 
-    target(fakeReq);
+    target(fakeReq, fakeRes);
 
   });
 
@@ -41,6 +42,7 @@ test('get application versions', t => {
     assert.plan(1);
 
     const fakeReq = { query: {} };
+    const fakeRes = { send: sinon.spy() };
 
     const expectedWhitelist = [
       '_id',
@@ -66,7 +68,7 @@ test('get application versions', t => {
       },
     });
 
-    target(fakeReq);
+    target(fakeReq, fakeRes);
 
   });
 

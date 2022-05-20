@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: quay.io/wealthwizards/ww-base-node:alpine-10
+      - image: quay.io/wealthwizards/ww-base-node:alpine-14
         environment:
           MONGODB_URL: mongodb://127.0.0.1:27017/version_service
       - image: mongo:3.4.1

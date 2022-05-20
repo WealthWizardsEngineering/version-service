@@ -14,6 +14,7 @@ test('get environment', t => {
         id: fakeId,
       },
     };
+    const fakeRes = { send: sinon.spy() };
 
     const expectedWhitelist = [
       'date',
@@ -35,7 +36,7 @@ test('get environment', t => {
       },
     });
 
-    target(fakeReq);
+    target(fakeReq, fakeRes);
   });
 
   t.test('should build projection from whitelist', assert => {
@@ -48,6 +49,7 @@ test('get environment', t => {
         id: fakeId,
       },
     };
+    const fakeRes = { send: sinon.spy() };
 
     const expectedWhitelist = [
     ];
@@ -67,7 +69,7 @@ test('get environment', t => {
       },
     });
 
-    target(fakeReq);
+    target(fakeReq, fakeRes);
 
   });
 
