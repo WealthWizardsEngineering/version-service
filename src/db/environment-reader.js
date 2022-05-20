@@ -1,3 +1,4 @@
+const async = require('async');
 const ApplicationVersion = require('./application-version-model');
 
 const getEnvironment = (query, projection, id) => {
@@ -10,7 +11,6 @@ const getEnvironment = (query, projection, id) => {
     .exec();
   const another_promise = applications_promise.then (function (applications) {
     return new Promise ( function (resolve) {
-      var async = require('async');
       async.map(applications, function(item, cb) {
         const request = ApplicationVersion.find();
         request.where('environment', id);
