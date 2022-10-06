@@ -55,7 +55,7 @@
     "mongoose": "^5.11.16",
     "nocache": "2.1.0",
     "response-time": "2.3.2",
-    "snyk": "^1.189.0"
+    "snyk": "^1.996.0"
   },
   "snyk": true
 }
